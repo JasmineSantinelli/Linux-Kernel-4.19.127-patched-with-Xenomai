@@ -10,15 +10,20 @@ For Rasperry pi 4B we have some issues about the version compatibility of the Ke
 
 -Download Xenomai source code from here:https://xenomai.org/downloads/xenomai/stable/ (we're using the 3.1)
  
+-Download the repository
+
+ Patch:
   patch -p1 <../pre-xenomai.patch
 ../xenomai/scripts/prepare-kernel.sh --linux=./ --arch=arm --ipipe=../ipipe-core-4.19.124-cip27-arm-09-MOD.patch
 
+Build Kernel:
 make -j4 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2711_defconfig 
 make -j4 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
 make -j4 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-  bzImage modules dtbs
 
+Having built the kernel, you need to copy it onto your Raspberry Pi and install the modules; 
+this is best done directly using an SD card reader and using deploy.sh.
 
-
-Souce:
+Source:
 https://www.raspberrypi.org/documentation/linux/kernel/building.md
 http://www.simplerobot.net/2019/12/xenomai-3-for-raspberry-pi-4.html
