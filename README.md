@@ -9,6 +9,14 @@ For Rasperry pi 4B we have some issues about the version compatibility of the Ke
 -Download Linux Kernel from here: https://github.com/raspberrypi/linux and then find the 4.19.127 version searching in the commit (git reset -hard commit number) 
 
 -Download Xenomai source code from here:https://xenomai.org/downloads/xenomai/stable/ (we're using the 3.1)
+ 
+  patch -p1 <../pre-xenomai.patch
+../xenomai/scripts/prepare-kernel.sh --linux=./ --arch=arm --ipipe=../ipipe-core-4.19.124-cip27-arm-09-MOD.patch
+
+make -j4 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2711_defconfig 
+make -j4 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- menuconfig
+make -j4 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf-  bzImage modules dtbs
+
 
 
 Souce:
